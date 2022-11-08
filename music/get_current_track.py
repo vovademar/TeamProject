@@ -1,7 +1,7 @@
 from yandex_music import Client
 import os
 
-token = 'token'
+token = 'token here'
 
 client = Client(token).init()
 
