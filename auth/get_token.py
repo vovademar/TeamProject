@@ -7,6 +7,11 @@ from selenium.webdriver.remote.command import Command
 from webdriver_manager.chrome import ChromeDriverManager
 
 
+class GetToken(object):
+    def __init__(self):
+        self.token = get_token()
+
+
 def is_active(driver):
     try:
         driver.execute(Command.GET_ALL_COOKIES)
@@ -47,6 +52,3 @@ def get_token():
         pass
 
     return token
-
-
-print(get_token())
