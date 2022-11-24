@@ -1,10 +1,7 @@
 from itertools import groupby
 from time import sleep
-
 from yandex_music import Client
-
 from music.radio.radio import Radio
-
 
 
 def choose_what_to_play(client):
@@ -36,5 +33,18 @@ def choose_what_to_play(client):
         s_tag = input()
 
     _station_id = f'{s_type}:{s_tag}'
+    _station_from = s_type + "-" + s_tag
+    return _station_id, _station_from
 
-    return _station_id
+
+def play_chosen_radio(client, st_id, st_from):
+    radio = Radio(client)
+    first_track = radio.start_radio(st_id, st_from)
+    print('[Radio] First track is:', first_track)
+
+    # get new track every 5 sec
+    while True:
+        sleep(5)
+        next_track = radio.play_next()
+        print('[Radio] Next track is:', next_track)
+
