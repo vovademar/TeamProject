@@ -1,7 +1,18 @@
 from itertools import groupby
 from time import sleep
-from yandex_music import Client
 from music.radio.radio import Radio
+
+
+class TrackByMood(object):
+    def __init__(self, client):
+        self.client = client
+        self.chose = choose_what_to_play(client)
+
+    def get_chosen_tracks(self):
+        return self.chose
+
+    def radi(self):
+        return play_chosen_radio(self.client, self.chose[0], self.chose[1])
 
 
 def choose_what_to_play(client):
@@ -47,4 +58,3 @@ def play_chosen_radio(client, st_id, st_from):
         sleep(5)
         next_track = radio.play_next()
         print('[Radio] Next track is:', next_track)
-
