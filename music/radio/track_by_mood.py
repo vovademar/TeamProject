@@ -46,6 +46,13 @@ def choose_what_to_play(client):
     _station_id = f'{s_type}:{s_tag}'
     _station_from = s_type + "-" + s_tag
     return _station_id, _station_from
+    
+
+def choose_mood_by_emotion(s_tag):
+    s_type = 'mood'
+    _station_id = f'{s_type}:{s_tag}'
+    _station_from = s_type + "-" + s_tag
+    return _station_id, _station_from
 
 
 def play_chosen_radio(client, st_id, st_from):
