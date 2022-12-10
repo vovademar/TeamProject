@@ -32,7 +32,7 @@ def get_token():
 
     token = None
 
-    while token == None and is_active(driver):
+    while (token is None) and is_active(driver):
         sleep(1)
         try:
             logs_raw = driver.get_log("performance")

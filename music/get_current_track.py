@@ -27,4 +27,3 @@ def catch_label(client):
         return f"{artists} - {title}"
     except Exception as e:
         return 'No track'
-

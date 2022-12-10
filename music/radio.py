@@ -1,5 +1,4 @@
 from random import random
-
 from yandex_music import Track
 
 
