@@ -4,7 +4,8 @@ from auth.get_token import GetToken
 from music.get_current_track import CurrentTrack
 from music.radio.track_by_mood import TrackByMood
 
-token = GetToken().token
+token = "AQAAAAAh8P0hAAG8XlMWGPlGCU02lUE5QaCruRo"
+    # GetToken().token
 print(token)
 client = Client(token).init()
 
