@@ -1,10 +1,10 @@
 from yandex_music import Client
 import os
 
-
 token = 'token'
 
 client = Client(token).init()
+
 
 # namesound = client.users_likes_tracks()[0].fetch_track().title
 #
@@ -66,7 +66,9 @@ def play_by_track_id():
             exit_status = os.system(f'rhythmbox-client --play-uri {filename}')
             print(f'"rhythmbox-client --play-uri" command exit status: {exit_status}')
 
-#play first liked track
+
+# play first liked track
+
 def play_first_track():
     track = client.users_likes_tracks()[25].fetch_track()
     name = track.title
@@ -80,14 +82,14 @@ def play_first_track():
 play_first_track()
 
 #
-#print_genres()
-#print_tracks()
+# print_genres()
+# print_tracks()
 
-#play_by_track_id()
+# play_by_track_id()
 
-#play_first_chart_track()
+# play_first_chart_track()
 
-#play_first_chart_track()
+# play_first_chart_track()
 # only if you have rhythmbox-client player
 # play_first_chart_track()
 # play_by_track_id()
