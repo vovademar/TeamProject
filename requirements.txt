@@ -1,2 +1,4 @@
 Flask >= 2.2.3
 yandex-music >= 2.0.1
+torch >= 1.13
+deepface >= 0.0.79
