@@ -1,0 +1,3 @@
+[submodule "android/EmotionalMusicMobile"]
+	path = android/EmotionalMusicMobile
+	url = https://github.com/EresK/EmotionalMusicMobile.git
