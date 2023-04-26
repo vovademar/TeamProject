@@ -2,9 +2,13 @@ class CurrentTrack(object):
     def __init__(self, client):
         self.client = client
         self.label = catch_label(client)
+        self.pic = catch_pic(client)
 
     def get_label(self):
         return self.label
+
+    def get_pic(self):
+        return self.pic
 
 
 def catch_track(client):
@@ -27,4 +31,13 @@ def catch_label(client):
         return f"{artists} - {title}"
     except Exception as e:
         return 'No track'
+
+
+def catch_pic(client):
+    try:
+        track = catch_track(client)
+        pic = track.downloadCover("photo.png")
+        return pic
+    except Exception as e:
+        return 'No picture'
 
