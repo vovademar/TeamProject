@@ -21,6 +21,6 @@ client: Client = Client(token).init()
 
 
 curTrack = CurrentTrack(client).get_label()
-CurrentTrack(client).get_pic()
+CurrentTrack(client)
 
 print(curTrack)

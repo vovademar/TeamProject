@@ -28,7 +28,7 @@ def catch_label(client):
         track = catch_track(client)
         artists = ', '.join(track.artists_name())
         title = track.title
-        return f"{artists} - {title}"
+        return f"{artists}-{title}"
     except Exception as e:
         return 'No track'
 
@@ -36,7 +36,7 @@ def catch_label(client):
 def catch_pic(client):
     try:
         track = catch_track(client)
-        pic = track.downloadCover("photo.png")
+        pic = track.downloadCover(f"{catch_label(client)}.png")
         return pic
     except Exception as e:
         return 'No picture'
