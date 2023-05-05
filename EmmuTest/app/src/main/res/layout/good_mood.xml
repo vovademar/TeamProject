@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your mood"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/sad_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sad"
+            android:textSize="18sp"
+            android:layout_marginRight="16dp"/>
+
+        <Button
+            android:id="@+id/happy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Happy"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/angry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Angry"
+            android:textSize="18sp"
+            android:layout_marginRight="16dp"/>
+
+        <Button
+            android:id="@+id/excited_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Excited"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/tired_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tired"
+            android:textSize="18sp"
+            android:layout_marginRight="16dp"/>
+
+        <Button
+            android:id="@+id/relaxed_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relaxed"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/custom_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
