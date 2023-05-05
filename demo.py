@@ -15,15 +15,17 @@ token = ""
 print(token)
 
 client: Client = Client(token).init()
+#
+# track_by_mood = TrackByMood(client)
+#
+# track_by_mood.radi()
+# rad = track_by_mood.radi()[1]
+#
+# print("next track:::")
+# play_next_radio_track(rad)
 
-track_by_mood = TrackByMood(client)
 
-track_by_mood.radi()
-rad = track_by_mood.radi()[1]
+curTrack = CurrentTrack(client).get_label()
+CurrentTrack(client)
 
-print("next track:::")
-play_next_radio_track(rad)
-
-# while True:
-#     curTrack = CurrentTrack(client).get_label()
-#     print(curTrack)
+print(curTrack)
