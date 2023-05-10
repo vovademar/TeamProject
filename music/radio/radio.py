@@ -40,6 +40,9 @@ class Radio:
         self.current_track = self.__update_current_track()
         return self.current_track
 
+    def get_cur_track(self):
+        return self.current_track
+
     def __update_radio_batch(self, queue=None):
         self.index = 0
         self.station_tracks = self.client.rotor_station_tracks(self.station_id, queue=queue)
