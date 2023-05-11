@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SelectSearchingMethodActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/songs_text"
+        android:textColor="@color/black"
+        android:text="ПОИСК МУЗЫКИ"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/find_music_by_moods_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поиск музыки по настроению"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/songs_text"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        android:elevation="4dp"/>
+
+    <Button
+        android:id="@+id/find_music_by_photo_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поиск музыки по фото"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/find_music_by_moods_button"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        android:elevation="4dp"/>
+
+</RelativeLayout>
