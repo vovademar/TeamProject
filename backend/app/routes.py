@@ -75,8 +75,9 @@ def sad_radio():
 def pre_download_sad():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_sad()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('sad.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -93,8 +94,9 @@ def angry_radio():
 def pre_download_angry():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_angry()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('angry.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -111,8 +113,9 @@ def disgust_radio():
 def pre_download_disgust():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_disgust()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('disgust.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -129,8 +132,9 @@ def fear_radio():
 def pre_download_fear():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_fear()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('fear.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -147,8 +151,9 @@ def happy_radio():
 def pre_download_happy():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_happy()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('happy.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -165,8 +170,9 @@ def neutral_radio():
 def pre_download_neutral():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_neutral()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('neutral.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
@@ -183,8 +189,9 @@ def surprise_radio():
 def pre_download_surprise():
     track_by_mood = TrackByMood(client)
     track = track_by_mood.play_surprise()[0]
-    name = track.title
-    filename = f'{name}.mp3'
+    artists = ', '.join(track.artists_name())
+    title = track.title
+    filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('surprise.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")

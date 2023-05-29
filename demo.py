@@ -15,8 +15,8 @@ client: Client = Client(token).init()
 #angry, disgust, fear, happy, neutral, sad, surprise
 #aggressive, haunting, dark, happy, dream, sad, epic
 track_by_mood = TrackByMood(client)
-print(track_by_mood.play_sad())
-# print(track_by_mood.get_chosen_tracks())
+#print(track_by_mood.play_sad())
+print(track_by_mood.get_chosen_tracks())
 
 # track_by_mood.radi()
 # rad = track_by_mood.radi()[1]
