@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:layout_below="@id/sadButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:id="@+id/sadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Sad Music"
+        android:layout_below="@id/recycler_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -31,7 +31,7 @@ public class MoodActivity extends AppCompatActivity {
         sadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSadMusic();
+                //getSadMusic();
                 Intent intent = new Intent(MoodActivity.this, MainActivity.class);
                 intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Sad/%'");
                 startActivity(intent);
@@ -48,33 +48,33 @@ public class MoodActivity extends AppCompatActivity {
         });
     }
 
-    private void getSadMusic(){
-        asyncHttpClient = new AsyncHttpClient();
-//        String url = "http://192.168.0.104:5000/play_sad_radio";
-        asyncHttpClient.get("http://192.168.0.104:5000/play_sad_radio", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    // сохраняем полученный файл на устройстве
-                    String fileName = "sad_music.mp3";
-                    File dir = new File(Environment.getExternalStorageDirectory() + "/Emmu/Sad");
-                    if (!dir.exists()) {
-                        dir.mkdirs();
-                    }
-                    File file = new File(dir, fileName);
-                    FileOutputStream fos = new FileOutputStream(file);
-                    fos.write(responseBody);
-                    fos.close();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("MoodActivity", "Failed to download sad music");
-            }
-        });
-    }
+//    private void getSadMusic(){
+//        asyncHttpClient = new AsyncHttpClient();
+////        String url = "http://192.168.0.104:5000/play_sad_radio";
+//        asyncHttpClient.get("http://192.168.0.104:5000/play_sad_radio", new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                try {
+//                    // сохраняем полученный файл на устройстве
+//                    String fileName = "sad_music.mp3";
+//                    File dir = new File(Environment.getExternalStorageDirectory() + "/Emmu/Sad");
+//                    if (!dir.exists()) {
+//                        dir.mkdirs();
+//                    }
+//                    File file = new File(dir, fileName);
+//                    FileOutputStream fos = new FileOutputStream(file);
+//                    fos.write(responseBody);
+//                    fos.close();
+//                } catch (Exception e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                Log.e("MoodActivity", "Failed to download sad music");
+//            }
+//        });
+//    }
 
 }
