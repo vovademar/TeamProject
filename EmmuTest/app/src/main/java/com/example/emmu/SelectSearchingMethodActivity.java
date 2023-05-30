@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.emmu.CameraActivities.CameraActivity;
+
 public class SelectSearchingMethodActivity extends AppCompatActivity {
 
     private Button findMusicByMoodsButton;
@@ -33,7 +35,8 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
         findMusicByPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Обработка нажатия на кнопку "Поиск музыки по фото"
+                Intent intent = new Intent(SelectSearchingMethodActivity.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
     }

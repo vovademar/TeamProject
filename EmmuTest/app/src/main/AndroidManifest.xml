@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.emmu">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Emmu">
-        <activity android:name=".MusicPlayerActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".MoodActivity"></activity>
+        <activity android:name=".MusicPlayerActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MoodActivity" />
+        <activity android:name=".CameraActivities.CameraActivity" />
         <activity android:name=".SelectSearchingMethodActivity"
             android:exported="true">
             <intent-filter>
