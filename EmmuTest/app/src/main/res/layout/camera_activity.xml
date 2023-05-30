@@ -37,6 +37,17 @@
             android:background="@drawable/circle"
             android:onClick="captureImage" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="70dp"
+            android:layout_toEndOf="@id/captureBtn"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openGallery"
+            android:src="@drawable/ic_galary" />
+
     </RelativeLayout>
 
 

@@ -1,7 +1,9 @@
 package com.example.emmu.CameraActivities;
 
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.MediaActionSound;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.emmu.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 
 public class CameraActivity extends AppCompatActivity {
     MediaActionSound sound = new MediaActionSound();
@@ -101,6 +104,14 @@ public class CameraActivity extends AppCompatActivity {
             File outputFile = new File(folder_ui, System.currentTimeMillis() + "_image.jpg");
             return outputFile;
         }
+    }
+
+    public void openGallery(View view) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Camera App");
+        intent.setDataAndType(uri, "images/*");
+        startActivity(Intent.createChooser(intent, "Open folder"));
     }
 
     public void captureImage(View view) {
