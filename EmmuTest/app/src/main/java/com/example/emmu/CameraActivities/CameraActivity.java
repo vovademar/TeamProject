@@ -1,25 +1,39 @@
 package com.example.emmu.CameraActivities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emmu.CameraUtils.CameraPreview;
 import com.example.emmu.CameraUtils.Permission;
 import com.example.emmu.R;
+import com.example.emmu.ml.Model;
+
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
 
 public class CameraActivity extends AppCompatActivity {
     MediaActionSound sound = new MediaActionSound();
@@ -32,12 +46,20 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             File picture_file = getOutputMediaFile();
             try {
-                FileOutputStream fos = new FileOutputStream(picture_file);
                 sound.play(MediaActionSound.SHUTTER_CLICK);
+                FileOutputStream fos = new FileOutputStream(picture_file);
                 fos.write(data);
                 fos.close();
+
+                if (picture_file != null) {
+                    String mood = getMood(picture_file);
+
+                    TextView textView = findViewById(R.id.camera_message_mood);
+                    textView.setText(mood);
+                }
+
                 mCamera.startPreview();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -46,7 +68,6 @@ public class CameraActivity extends AppCompatActivity {
     private CameraPreview cameraPreview;
 
     private int currentCameraId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +93,50 @@ public class CameraActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
         return camera;
+    }
+
+    private String getMood(File imageFile) throws Exception {
+        final String[] emotions = new String[] {"angry", "disgust", "fear", "happy", "sad", "surprise", "neutral"};
+
+        Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+        imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 48, 48, true);
+
+        TensorImage tensorImage = new TensorImage(DataType.FLOAT32);
+        tensorImage.load(imageBitmap);
+
+        TransformToGrayscaleOp transform = new TransformToGrayscaleOp();
+        tensorImage = transform.apply(tensorImage);
+
+        String emotion = "Not recognized";
+
+        try {
+            Model model = Model.newInstance(this);
+
+            Model.Outputs outputs = model.process(tensorImage.getTensorBuffer());
+            TensorBuffer outputFeature = outputs.getOutputFeature0AsTensorBuffer();
+
+            float[] features = outputFeature.getFloatArray();
+
+            int featureIndex = -1;
+            float maxFeature = Float.MIN_VALUE;
+
+            for (int i = 0; i < features.length; i++) {
+                if (maxFeature < features[i]) {
+                    maxFeature = features[i];
+                    featureIndex = i;
+                }
+            }
+
+            if (featureIndex < 0 || featureIndex >= 7)
+                Log.e("Error", "Features index number not in 0 to 6");
+
+            emotion = emotions[featureIndex];
+        }
+        catch (Exception e) {
+            Log.e("Error", e.getMessage());
+        }
+
+        return emotion;
     }
 
     public void rotateCamera(View view) {

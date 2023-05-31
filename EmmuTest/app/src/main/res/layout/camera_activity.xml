@@ -50,5 +50,13 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/camera_message_mood"
+        android:textSize="20sp"
+        android:layout_marginVertical="550dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>
