@@ -62,6 +62,14 @@ def save_data(text):
     return "token saved"
 
 
+@app.route('/get_sad_name')
+def get_sad_track_name():
+    with open('sad.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
+
+
 @app.route('/play_sad_radio')
 def sad_radio():
     with open('sad.txt', 'r') as file:
@@ -79,6 +87,13 @@ def pre_download_sad():
     track.download(filename)
     file_sad = open('sad.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+
+
+@app.route('/get_angry_name')
+def get_angry_track_name():
+    with open('angry.txt', 'r') as file:
+        track_path = file.read().rstrip()
+    return track_path[52:len(track_path) - 4]
 
 
 @app.route('/play_angry_radio')
@@ -100,6 +115,14 @@ def pre_download_angry():
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
 
 
+@app.route('/get_disgust_name')
+def get_disgust_track_name():
+    with open('disgust.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
+
+
 @app.route('/play_disgust_radio')
 def disgust_radio():
     with open('disgust.txt', 'r') as file_disgust:
@@ -117,6 +140,14 @@ def pre_download_disgust():
     track.download(filename)
     file_sad = open('disgust.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+
+
+@app.route('/get_fear_name')
+def get_fear_track_name():
+    with open('fear.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
 
 
 @app.route('/play_fear_radio')
@@ -138,6 +169,14 @@ def pre_download_fear():
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
 
 
+@app.route('/get_happy_name')
+def get_happy_track_name():
+    with open('happy.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
+
+
 @app.route('/play_happy_radio')
 def happy_radio():
     with open('happy.txt', 'r') as file_fear:
@@ -157,6 +196,14 @@ def pre_download_happy():
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
 
 
+@app.route('/get_neutral_name')
+def get_neutral_track_name():
+    with open('neutral.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
+
+
 @app.route('/play_neutral_radio')
 def neutral_radio():
     with open('neutral.txt', 'r') as file_neutral:
@@ -174,6 +221,14 @@ def pre_download_neutral():
     track.download(filename)
     file_sad = open('neutral.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+
+
+@app.route('/get_surprise_name')
+def get_surprise_track_name():
+    with open('surprise.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[52:len(track_path) - 4]
 
 
 @app.route('/play_surprise_radio')
