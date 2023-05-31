@@ -30,17 +30,18 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
     private AsyncHttpClient asyncHttpClient;
+    private AsyncHttpClient asyncHttpClient1;
     RecyclerView recyclerView;
     TextView noMusicTextView;
     ArrayList<AudioModel> songsList = new ArrayList<>();
-    Button sadButton;
+  Button loadButton;
     Button refreshButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sadButton = findViewById(R.id.sadButton);
+        loadButton = findViewById(R.id.loadButton);
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
         refreshButton= findViewById(R.id.refreshButton);
@@ -51,11 +52,32 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
             }
         });
+        String mood1 = getIntent().getStringExtra("mood1");
 
-        sadButton.setOnClickListener(new View.OnClickListener() {
+        loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSadMusic();
+                if(mood1.equals("sad")) {
+                    getMusic("http://192.168.0.104:5000/play_sad_radio", "http://192.168.0.104:5000/get_sad_name", "/Emmu/Sad");
+                }
+                if(mood1.equals("happy")) {
+                    getMusic("http://192.168.0.104:5000/play_happy_radio", "http://192.168.0.104:5000/get_happy_name", "/Emmu/Happy");
+                }
+                if(mood1.equals("angry")) {
+                    getMusic("http://192.168.0.104:5000/play_angry_radio", "http://192.168.0.104:5000/get_angry_name", "/Emmu/Angry");
+                }
+                if(mood1.equals("disgust")) {
+                    getMusic("http://192.168.0.104:5000/play_disgust_radio", "http://192.168.0.104:5000/get_disgust_name", "/Emmu/Disgust");
+                }
+                if(mood1.equals("fear")) {
+                    getMusic("http://192.168.0.104:5000/play_fear_radio", "http://192.168.0.104:5000/get_fear_name", "/Emmu/Fear");
+                }
+                if(mood1.equals("neutral")) {
+                    getMusic("http://192.168.0.104:5000/play_neutral_radio", "http://192.168.0.104:5000/get_neutral_name", "/Emmu/Neutral");
+                }
+                if(mood1.equals("surprised")) {
+                    getMusic("http://192.168.0.104:5000/play_surprise_radio", "http://192.168.0.104:5000/get_surprise_name", "/Emmu/Surprised");
+                }
             }
         });
 
@@ -160,20 +182,70 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-    private void getSadMusic() {
+//    private void getSadMusic() {
+//        asyncHttpClient = new AsyncHttpClient();
+////        String url = "http://192.168.0.104:5000/play_sad_radio";
+//        asyncHttpClient.get("http://192.168.43.69:5000/play_sad_radio", new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                try {
+//                    // сохраняем полученный файл на устройстве
+//                    String fileName = "sadmujjh.mp3";
+//                    File dir = new File(Environment.getExternalStorageDirectory() + "/Emmu/Sad");
+//                    if (!dir.exists()) {
+//                        dir.mkdirs();
+//                    }
+//                    File file = new File(dir, fileName);
+//                    FileOutputStream fos = new FileOutputStream(file);
+//                    fos.write(responseBody);
+//                    fos.close();
+//                } catch (Exception e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                Log.e("MoodActivity", "Failed to download sad music");
+//            }
+//        });
+//    }
+
+    private void getMusic(String mus, String name, String path) {
+        asyncHttpClient1 = new AsyncHttpClient();
         asyncHttpClient = new AsyncHttpClient();
+        final String[] fileName = new String[1];
+
 //        String url = "http://192.168.0.104:5000/play_sad_radio";
-        asyncHttpClient.get("http://192.168.43.69:5000/play_sad_radio", new AsyncHttpResponseHandler() {
+
+//        asyncHttpClient.get("http://192.168.0.104:5000/play_sad_radio", new AsyncHttpResponseHandler() {
+// не проверял, возможно не работает
+        asyncHttpClient1.get(name, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    fileName[0] = String.valueOf(responseBody);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("MoodActivity", "Failed to download sad music");
+            }
+        });
+        asyncHttpClient.get(mus, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
                     // сохраняем полученный файл на устройстве
-                    String fileName = "sadmujjh.mp3";
-                    File dir = new File(Environment.getExternalStorageDirectory() + "/Emmu/Sad");
+
+                    File dir = new File(Environment.getExternalStorageDirectory() + path);//"/Emmu/Sad"
                     if (!dir.exists()) {
                         dir.mkdirs();
                     }
-                    File file = new File(dir, fileName);
+                    File file = new File(dir, fileName[0]);
                     FileOutputStream fos = new FileOutputStream(file);
                     fos.write(responseBody);
                     fos.close();
@@ -188,8 +260,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 
