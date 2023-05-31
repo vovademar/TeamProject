@@ -1,97 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose your mood"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
-
+    android:background="@color/background"
+    >
+    
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        tools:ignore="ExtraText">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/sad_button"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sad"
-            android:textSize="18sp"
-            android:backgroundTint="@color/sad_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/happy_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Happy"
-            android:textSize="18sp"
-            android:backgroundTint="@color/happy_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/angry_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Angry"
-            android:textSize="18sp"
-            android:backgroundTint="@color/angry_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/disgust_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Disgust"
-            android:textSize="18sp"
-            android:backgroundTint="@color/excited_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/fear_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fear"
-            android:textSize="18sp"
-            android:backgroundTint="@color/tired_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/neutral_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Neutral"
-            android:textSize="18sp"
-            android:backgroundTint="@color/relaxed_button_background"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/surprised_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Surprised"
-            android:textSize="18sp"
-            android:backgroundTint="@color/custom_button_background"
-            android:textColor="@color/white"
+            android:text="Choose mood"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             />
+        
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="4"
+            android:columnCount="2"
+            android:layout_margin="5dp"
+            android:columnOrderPreserved="false">
 
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/relaxed_button_background">
+
+                <RelativeLayout
+                    android:id="@+id/happy_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/happy">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Happy"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/yellow">
+
+                <RelativeLayout
+                    android:id="@+id/disgust_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/disgusting">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Disgust"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/sad_button_background">
+
+                <RelativeLayout
+                    android:id="@+id/sad_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/sad">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sad"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/happy_button_background">
+
+
+                <RelativeLayout
+                    android:id="@+id/fear_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/afraid">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scared"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/neutral">
+
+                <RelativeLayout
+                    android:id="@+id/neutral_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/neutral">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Neutral"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/excited_button_background">
+
+                <RelativeLayout
+                    android:id="@+id/suprised_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/suprise">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Suprised"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="@color/angry_button_background">
+
+                <RelativeLayout
+                    android:id="@+id/angry_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/angry">
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Angry"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp">
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

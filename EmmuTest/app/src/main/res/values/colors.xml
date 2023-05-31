@@ -7,13 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="sad_button_background">#2196F3</color>
-    <color name="happy_button_background">#4CAF50</color>
-    <color name="angry_button_background">#F44336</color>
-    <color name="excited_button_background">#FF9800</color>
+    <color name="sad_button_background">#DAA520</color>
+    <color name="happy_button_background">#9ACD32</color>
+    <color name="angry_button_background">#FF4500</color>
+    <color name="excited_button_background">#00BFFF</color>
     <color name="tired_button_background">#9E9E9E</color>
     <color name="relaxed_button_background">#673AB7</color>
     <color name="custom_button_background">#FF5722</color>
-
-
+    <color name="yellow">#A52A2A</color>
+    <color name="neutral">#7B68EE</color>
+    <color name="background">#FFFAFA</color>
 </resources>

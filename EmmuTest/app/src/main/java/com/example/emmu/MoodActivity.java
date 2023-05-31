@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +26,8 @@ public class MoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mood_selection);
 
-        Button sadButton = findViewById(R.id.sad_button);
-        Button happyButton = findViewById(R.id.happy_button);
+        RelativeLayout sadButton = findViewById(R.id.sad_button);
+        RelativeLayout happyButton = findViewById(R.id.happy_button);
 
         sadButton.setOnClickListener(new View.OnClickListener() {
             @Override
