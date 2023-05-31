@@ -1,11 +1,9 @@
-import time
-from time import sleep
-
-from backend.app import app
+from deepface import DeepFace
+from flask import request
 from flask import send_file
 from yandex_music import Client
-from flask import request
 
+from backend.app import app
 from music.get_current_track import CurrentTrack
 from music.radio.track_by_mood import TrackByMood
 
@@ -188,3 +186,43 @@ def pre_download_surprise():
     track.download(filename)
     file_sad = open('surprise.txt', 'w')
     file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    input_args = request.get_json()
+
+    if input_args is None:
+        return {"message": "empty input set passed"}
+
+    img_path = input_args.get("img_path")
+    if img_path is None:
+        return {"message": "you must pass img_path input"}
+
+    detector_backend = input_args.get("detector_backend", "retinaface")
+    enforce_detection = input_args.get("enforce_detection", False)
+    align = input_args.get("align", True)
+    actions = input_args.get("actions", ["emotion"])
+
+    demographies = analyze_image(
+        img_path=img_path,
+        actions=actions,
+        detector_backend=detector_backend,
+        enforce_detection=enforce_detection,
+        align=align,
+    )
+
+    return demographies["results"][0]["dominant_emotion"]
+
+
+def analyze_image(img_path, actions, detector_backend, enforce_detection, align):
+    result = {}
+    demographies = DeepFace.analyze(
+        img_path=img_path,
+        actions=actions,
+        detector_backend=detector_backend,
+        enforce_detection=enforce_detection,
+        align=align,
+    )
+    result["results"] = demographies
+    return result
