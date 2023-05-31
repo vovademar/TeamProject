@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#1030F0">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <gradient
+                android:startColor="@color/sad_button_background"
+                android:endColor="#1030F0"
+                android:angle="270" />
+        </shape>
+    </item>
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <gradient
+                android:startColor="@color/sad_button_background"
+                android:endColor="#1030F0"
+                android:angle="270" />
+            <alpha android:duration="150"
+                android:fromAlpha="0.5"
+                android:toAlpha="1.0" />
+        </shape>
+    </item>
+</ripple>
