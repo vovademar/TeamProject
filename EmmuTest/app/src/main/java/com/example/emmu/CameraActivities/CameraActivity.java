@@ -8,6 +8,7 @@ import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,19 +22,42 @@ import com.example.emmu.CameraUtils.CameraPreview;
 import com.example.emmu.CameraUtils.Permission;
 import com.example.emmu.R;
 import com.example.emmu.ml.Model;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
+import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.impl.client.HttpClients;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class CameraActivity extends AppCompatActivity {
     MediaActionSound sound = new MediaActionSound();
@@ -52,10 +76,12 @@ public class CameraActivity extends AppCompatActivity {
                 fos.close();
 
                 if (picture_file != null) {
-                    String mood = getMood(picture_file);
+                    String imageBase64 = getBase64FromPath(picture_file.getAbsolutePath());
+                    String mood = getMoodFromServer("http://192.168.0.137:5000/analyze", "data:image/jpeg;base64," + imageBase64);
 
-                    TextView textView = findViewById(R.id.camera_message_mood);
-                    textView.setText(mood);
+//                    String mood = getMood(picture_file);
+//                    TextView textView = findViewById(R.id.camera_message_mood);
+//                    textView.setText(mood);
                 }
 
                 mCamera.startPreview();
@@ -137,6 +163,51 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         return emotion;
+    }
+
+    private String getMoodFromServer(String url, String imageBase64) throws IOException, JSONException {
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+
+        RequestParams params = new RequestParams();
+        params.put("img_path", imageBase64);
+
+        final String[] responseMood = new String[1];
+        responseMood[0] = "Not recognized";
+
+        AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                TextView textView = findViewById(R.id.camera_message_mood);
+                textView.setText(new String(responseBody, StandardCharsets.UTF_8));
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                responseMood[0] = "Failure";
+            }
+        };
+
+        JSONObject jsonParams = new JSONObject();
+        jsonParams.put("img_path", imageBase64);
+        StringEntity entity = new StringEntity(jsonParams.toString());
+        RequestHandle handle = asyncHttpClient.post(getApplicationContext(), url, entity, "application/json", handler);
+
+        return responseMood[0];
+    }
+
+    public static String getBase64FromPath(String path) {
+        String base64 = "";
+        try {/*from w w w . ja va 2s . c om*/
+            File file = new File(path);
+            byte[] buffer = new byte[(int) file.length() + 100];
+            int length = new FileInputStream(file).read(buffer);
+            base64 = Base64.encodeToString(buffer, 0, length,
+                    Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return base64;
     }
 
     public void rotateCamera(View view) {
