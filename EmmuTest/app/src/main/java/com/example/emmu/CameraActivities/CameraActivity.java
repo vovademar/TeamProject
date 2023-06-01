@@ -14,14 +14,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emmu.CameraUtils.CameraPreview;
 import com.example.emmu.CameraUtils.Permission;
 import com.example.emmu.MainActivity;
-import com.example.emmu.MoodActivity;
 import com.example.emmu.R;
 import com.example.emmu.ml.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,30 +35,14 @@ import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpEntity;
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.entity.StringEntity;
-import cz.msebera.android.httpclient.impl.client.HttpClients;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class CameraActivity extends AppCompatActivity {
     MediaActionSound sound = new MediaActionSound();
@@ -72,7 +55,7 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             File picture_file = getOutputMediaFile();
             try {
-                //sound.play(MediaActionSound.SHUTTER_CLICK);
+                sound.play(MediaActionSound.SHUTTER_CLICK);
                 FileOutputStream fos = new FileOutputStream(picture_file);
                 fos.write(data);
                 fos.close();
@@ -124,7 +107,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private String getMood(File imageFile) throws Exception {
-        final String[] emotions = new String[] {"angry", "disgust", "fear", "happy", "sad", "surprise", "neutral"};
+        final String[] emotions = new String[]{"angry", "disgust", "fear", "happy", "sad", "surprise", "neutral"};
 
         Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
         imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 48, 48, true);
@@ -159,8 +142,7 @@ public class CameraActivity extends AppCompatActivity {
                 Log.e("Error", "Features index number not in 0 to 6");
 
             emotion = emotions[featureIndex];
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e("Error", e.getMessage());
         }
 
@@ -182,8 +164,9 @@ public class CameraActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 TextView textView = findViewById(R.id.camera_message_mood);
                 String personMood = new String(responseBody, StandardCharsets.UTF_8);
-                textView.setText(personMood);
-                if (personMood.equals("sad")){
+                Toast.makeText(getApplicationContext(), "Your mood is " + personMood, Toast.LENGTH_LONG).show();
+//                textView.setText(personMood);
+                if (personMood.equals("sad")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Sad/%'");
@@ -191,7 +174,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "sad");
                     startActivity(intent);
-                } else if (personMood.equals("happy")){
+                } else if (personMood.equals("happy")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Happy/%'");
@@ -199,7 +182,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "happy");
                     startActivity(intent);
-                } else if (personMood.equals("angry")){
+                } else if (personMood.equals("angry")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Angry/%'");
@@ -207,7 +190,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "angry");
                     startActivity(intent);
-                } else if (personMood.equals("disgust")){
+                } else if (personMood.equals("disgust")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Disgust/%'");
@@ -215,7 +198,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "disgust");
                     startActivity(intent);
-                } else if (personMood.equals("fear")){
+                } else if (personMood.equals("fear")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Fear/%'");
@@ -223,7 +206,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "fear");
                     startActivity(intent);
-                } else if (personMood.equals("neutral")){
+                } else if (personMood.equals("neutral")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Neutral/%'");
@@ -231,7 +214,7 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "neutral");
                     startActivity(intent);
-                } else if (personMood.equals("surprised")){
+                } else if (personMood.equals("surprised")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Surprised/%'");

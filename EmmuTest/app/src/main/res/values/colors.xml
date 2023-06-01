@@ -14,6 +14,5 @@
     <color name="tired_button_background">#9E9E9E</color>
     <color name="relaxed_button_background">#673AB7</color>
     <color name="custom_button_background">#FF5722</color>
-
-
+    <color name="gray">#8d8d8d</color>
 </resources>
