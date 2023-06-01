@@ -35,12 +35,10 @@
         android:id="@+id/enter_to_account_button"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="120dp"
         android:background="@drawable/new_button_background"
         app:layout_constraintBottom_toTopOf="@+id/find_music_by_moods_button"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -59,12 +57,10 @@
         android:id="@+id/find_music_by_moods_button"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/excited_button_background"
         app:layout_constraintBottom_toTopOf="@+id/find_music_by_photo_button"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_to_account_button">
 
@@ -84,12 +80,10 @@
         android:id="@+id/find_music_by_photo_button"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="50dp"
         android:layout_marginBottom="120dp"
         android:background="@drawable/tired_button_background"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
