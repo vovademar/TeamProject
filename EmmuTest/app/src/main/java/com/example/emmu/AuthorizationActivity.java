@@ -1,5 +1,7 @@
 package com.example.emmu;
 
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.yandex.authsdk.YandexAuthLoginOptions;
 import com.yandex.authsdk.YandexAuthOptions;
 import com.yandex.authsdk.YandexAuthSdk;
@@ -28,6 +31,15 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class AuthorizationActivity extends AppCompatActivity {
     private static final int REQUEST_LOGIN_SDK = 1;
     private String token = "";
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     private YandexAuthSdk sdk;
 
     @Override
@@ -57,7 +69,8 @@ public class AuthorizationActivity extends AppCompatActivity {
                 YandexAuthToken yandexAuthToken = sdk.extractToken(resultCode, data);
 
                 if (yandexAuthToken != null)
-                    token = yandexAuthToken.getValue().toString();
+                    setToken(yandexAuthToken.getValue());
+
                 Log.e("token", token);
             } catch (Exception ignore) {
             }
@@ -65,35 +78,31 @@ public class AuthorizationActivity extends AppCompatActivity {
 
         if (token != null && !token.equals("") && !token.equals("None")) {
             try {
-                updateToken();
+                //updateToken();
+                sendPostRequest();
             } catch (Exception e) {
                 Log.e("Login error", e.getMessage());
             }
         }
     }
 
-    private void updateToken() throws JSONException, UnsupportedEncodingException {
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
 
+    public void sendPostRequest() {
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        String fullUrl = "http://192.168.43.69:5000/sendtoken" + "?token=" + getToken();
+
+        client.post(fullUrl, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                TextView tokenInfoTextView = findViewById(R.id.token_info_yandex);
-                tokenInfoTextView.setText(R.string.token_linked_yandex);
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
+                // Обработка успешного ответа сервера
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody, Throwable error) {
+                // Обработка ошибки
             }
-        };
-
-        JSONObject jsonParams = new JSONObject();
-        jsonParams.put("token", token);
-        StringEntity entity = new StringEntity(jsonParams.toString());
-
-        asyncHttpClient.post(getApplicationContext(),
-                ServerInfo.buildUrl("sendtoken"),
-                entity,
-                "application/json", handler);
+        });
     }
+
 }
