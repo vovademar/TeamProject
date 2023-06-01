@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         String result = parts[parts.length - 2];
         result.toLowerCase();
         Log.e("mmod", result);
-        myTextView.setText(result + " SOngs");
+        myTextView.setText(result + " Songs");
         loadButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
