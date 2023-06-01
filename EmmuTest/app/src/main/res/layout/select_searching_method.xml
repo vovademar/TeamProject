@@ -1,62 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/header"
     tools:context=".SelectSearchingMethodActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/songs_text"
-        android:textColor="@color/black"
-        android:text="ПОИСК МУЗЫКИ"
-        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:text="Emotional music"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="35sp"
         android:textStyle="bold"
-        android:padding="16dp"
-        android:layout_centerHorizontal="true"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/find_music_by_moods_button"
+    </TextView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Поиск музыки по настроению"
-        android:layout_marginTop="32dp"
-        android:layout_below="@id/songs_text"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background"
-        android:elevation="4dp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/write_background"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/find_music_by_photo_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Поиск музыки по фото"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/find_music_by_moods_button"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background"
-        android:elevation="4dp"/>
-
-    <Button
+    <RelativeLayout
         android:id="@+id/enter_to_account_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Войти в аккаунт"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/find_music_by_photo_button"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background"
-        android:elevation="4dp"/>
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/new_button_background"
+        app:layout_constraintBottom_toTopOf="@+id/find_music_by_moods_button"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Войти в аккаунт"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/find_music_by_moods_button"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/excited_button_background"
+        app:layout_constraintBottom_toTopOf="@+id/find_music_by_photo_button"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_to_account_button">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Выбрать музыку по настроению"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/find_music_by_photo_button"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/tired_button_background"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Сделать фото для определения настроения"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

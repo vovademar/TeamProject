@@ -1,11 +1,13 @@
 package com.example.emmu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,13 +29,13 @@ public class MoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mood_selection);
 
-        Button sadButton = findViewById(R.id.sad_button);
-        Button happyButton = findViewById(R.id.happy_button);
-        Button angryButton = findViewById(R.id.angry_button);
-        Button disgustButton = findViewById(R.id.disgust_button);
-        Button fearButton = findViewById(R.id.fear_button);
-        Button neutralButton = findViewById(R.id.neutral_button);
-        Button surprisedButton = findViewById(R.id.surprised_button);
+        RelativeLayout sadButton = findViewById(R.id.sad_button);
+        RelativeLayout happyButton = findViewById(R.id.happy_button);
+        RelativeLayout angryButton = findViewById(R.id.angry_button);
+        RelativeLayout disgustButton = findViewById(R.id.disgust_button);
+        RelativeLayout fearButton = findViewById(R.id.fear_button);
+        RelativeLayout neutralButton = findViewById(R.id.neutral_button);
+        RelativeLayout surprisedButton = findViewById(R.id.surprised_button);
 
         sadButton.setOnClickListener(new View.OnClickListener() {
             @Override

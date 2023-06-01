@@ -15,4 +15,11 @@
     <color name="relaxed_button_background">#673AB7</color>
     <color name="custom_button_background">#FF5722</color>
     <color name="gray">#8d8d8d</color>
+    <color name="yellow">#A52A2A</color>
+    <color name="neutral">#7B68EE</color>
+    <color name="background">#FFFAFA</color>
+
+    <color name="background1">#581845</color>
+    <color name="background2">#b0033c</color>
+    <color name="background3">#ffb607</color>
 </resources>
