@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.MediaActionSound;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
@@ -16,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emmu.CameraUtils.CameraPreview;
@@ -39,12 +41,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class CameraActivity extends AppCompatActivity {
+    private static final int GALLERY_REQUEST = 100;
     MediaActionSound sound = new MediaActionSound();
     private FrameLayout frameLayout;
 
@@ -288,10 +292,27 @@ public class CameraActivity extends AppCompatActivity {
 
     public void openGallery(View view) {
         Intent intent = new Intent();
+        intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Camera App");
-        intent.setDataAndType(uri, "images/*");
-        startActivity(Intent.createChooser(intent, "Open folder"));
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), GALLERY_REQUEST);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
+            try {
+                Uri selectedImage = data.getData();
+                InputStream imageStream = getContentResolver().openInputStream(selectedImage);
+                byte[] bytes = imageStream.readAllBytes();
+
+                mPictureCallback.onPictureTaken(bytes, mCamera);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void captureImage(View view) {
