@@ -17,4 +17,12 @@
     <color name="yellow">#A52A2A</color>
     <color name="neutral">#7B68EE</color>
     <color name="background">#FFFAFA</color>
+
+    <color name="background1">#581845</color>
+    <color name="background2">#b0033c</color>
+    <color name="background3">#ffb607</color>>
+
+    <color name="gradient_2_1">#9400d4</color>
+    <color name="gradient_2_2">#8d64e6</color>
+    <color name="gradient_2_3">#87cefa</color>
 </resources>
