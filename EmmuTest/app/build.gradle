@@ -14,6 +14,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [YANDEX_CLIENT_ID:"7527e31437f240f49e002a06edcd6694"]
     }
 
     buildTypes {
@@ -37,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation "com.yandex.android:authsdk:2.5.1"
     implementation 'com.squareup.okhttp:okhttp:2.5.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation 'com.google.code.gson:gson:2.8.6'

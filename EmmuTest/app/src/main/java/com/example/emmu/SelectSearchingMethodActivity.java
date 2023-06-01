@@ -13,6 +13,7 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
 
     private Button findMusicByMoodsButton;
     private Button findMusicByPhotoButton;
+    private Button enterAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
 
         findMusicByMoodsButton = findViewById(R.id.find_music_by_moods_button);
         findMusicByPhotoButton = findViewById(R.id.find_music_by_photo_button);
+        enterAccountButton = findViewById(R.id.enter_to_account_button);
 
         findMusicByMoodsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,11 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectSearchingMethodActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
+        });
+
+        enterAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SelectSearchingMethodActivity.this, AuthorizationActivity.class);
+            startActivity(intent);
         });
     }
 }
