@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
         refreshButton = findViewById(R.id.refreshButton);
+        TextView myTextView = findViewById(R.id.songs_text);
 //        Button refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         String result = parts[parts.length - 2];
         result.toLowerCase();
         Log.e("mmod", result);
+        myTextView.setText(result);
         loadButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
