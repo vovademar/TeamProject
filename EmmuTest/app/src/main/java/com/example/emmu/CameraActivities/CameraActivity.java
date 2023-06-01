@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emmu.CameraUtils.CameraPreview;
 import com.example.emmu.CameraUtils.Permission;
+import com.example.emmu.MainActivity;
+import com.example.emmu.MoodActivity;
 import com.example.emmu.R;
 import com.example.emmu.ml.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -70,14 +72,14 @@ public class CameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             File picture_file = getOutputMediaFile();
             try {
-                sound.play(MediaActionSound.SHUTTER_CLICK);
+                //sound.play(MediaActionSound.SHUTTER_CLICK);
                 FileOutputStream fos = new FileOutputStream(picture_file);
                 fos.write(data);
                 fos.close();
 
                 if (picture_file != null) {
                     String imageBase64 = getBase64FromPath(picture_file.getAbsolutePath());
-                    String mood = getMoodFromServer("http://192.168.0.137:5000/analyze", "data:image/jpeg;base64," + imageBase64);
+                    String mood = getMoodFromServer("http://192.168.43.69:5000/analyze", "data:image/jpeg;base64," + imageBase64);
 
 //                    String mood = getMood(picture_file);
 //                    TextView textView = findViewById(R.id.camera_message_mood);
@@ -179,7 +181,66 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 TextView textView = findViewById(R.id.camera_message_mood);
-                textView.setText(new String(responseBody, StandardCharsets.UTF_8));
+                String personMood = new String(responseBody, StandardCharsets.UTF_8);
+                textView.setText(personMood);
+                if (personMood.equals("sad")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Sad/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "sad");
+                    startActivity(intent);
+                } else if (personMood.equals("happy")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Happy/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "happy");
+                    startActivity(intent);
+                } else if (personMood.equals("angry")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Angry/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "angry");
+                    startActivity(intent);
+                } else if (personMood.equals("disgust")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Disgust/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "disgust");
+                    startActivity(intent);
+                } else if (personMood.equals("fear")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Fear/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "fear");
+                    startActivity(intent);
+                } else if (personMood.equals("neutral")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Neutral/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "neutral");
+                    startActivity(intent);
+                } else if (personMood.equals("surprised")){
+                    Log.e("after ai", personMood);
+                    Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                    intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Surprised/%'");
+
+                    Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
+                    intent1.putExtra("mood1", "surprised");
+                    startActivity(intent);
+                }
+
             }
 
             @Override
