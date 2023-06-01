@@ -35,7 +35,7 @@ def get_track_id():
 @app.route('/getcover')
 def get_picture():
     CurrentTrack(client).get_pic()
-    return send_file(f'/Users/valdemar/PycharmProjects/TeamProject/backend/{CurrentTrack(client).get_label()}.png')
+    return send_file(f'/Users/valdemar/NSU/my/TeamProject/backend/{CurrentTrack(client).get_label()}.png')
 
 
 @app.route('/sendtoken', methods=['POST'])
@@ -67,7 +67,7 @@ def get_sad_track_name():
     with open('sad.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_sad_radio')
@@ -86,14 +86,14 @@ def pre_download_sad():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('sad.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_angry_name')
 def get_angry_track_name():
     with open('angry.txt', 'r') as file:
         track_path = file.read().rstrip()
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_angry_radio')
@@ -112,7 +112,7 @@ def pre_download_angry():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('angry.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_disgust_name')
@@ -120,7 +120,7 @@ def get_disgust_track_name():
     with open('disgust.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_disgust_radio')
@@ -139,7 +139,7 @@ def pre_download_disgust():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('disgust.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_fear_name')
@@ -147,7 +147,7 @@ def get_fear_track_name():
     with open('fear.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_fear_radio')
@@ -166,7 +166,7 @@ def pre_download_fear():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('fear.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_happy_name')
@@ -174,7 +174,7 @@ def get_happy_track_name():
     with open('happy.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_happy_radio')
@@ -193,7 +193,7 @@ def pre_download_happy():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('happy.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_neutral_name')
@@ -201,7 +201,7 @@ def get_neutral_track_name():
     with open('neutral.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_neutral_radio')
@@ -220,7 +220,7 @@ def pre_download_neutral():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('neutral.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route('/get_surprise_name')
@@ -228,7 +228,7 @@ def get_surprise_track_name():
     with open('surprise.txt', 'r') as file:
         track_path = file.read().rstrip()
 
-    return track_path[52:len(track_path) - 4]
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_surprise_radio')
@@ -247,7 +247,7 @@ def pre_download_surprise():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('surprise.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
 
 
 @app.route("/analyze", methods=["POST"])
