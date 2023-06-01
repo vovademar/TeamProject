@@ -214,13 +214,13 @@ public class CameraActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
                     intent1.putExtra("mood1", "neutral");
                     startActivity(intent);
-                } else if (personMood.equals("surprised")) {
+                } else if (personMood.equals("surprise")) {
                     Log.e("after ai", personMood);
                     Intent intent = new Intent(CameraActivity.this, MainActivity.class);
                     intent.putExtra("mood", " LIKE '%/storage/emulated/0/Emmu/Surprised/%'");
 
                     Intent intent1 = new Intent(CameraActivity.this, MainActivity.class);
-                    intent1.putExtra("mood1", "surprised");
+                    intent1.putExtra("mood1", "surprise");
                     startActivity(intent);
                 }
 

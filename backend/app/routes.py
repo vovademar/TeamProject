@@ -41,8 +41,9 @@ def get_picture():
 @app.route('/sendtoken', methods=['POST'])
 def json_example():
     request_data = request.args.get("token")
+    save_data(request_data)
     pre_download_each()
-    return save_data(request_data)
+    return "saved"
 
 
 def pre_download_each():
