@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,6 +27,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView noMusicTextView;
     ArrayList<AudioModel> songsList = new ArrayList<>();
-  Button loadButton;
+    Button loadButton;
     Button refreshButton;
 
     @Override
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         loadButton = findViewById(R.id.loadButton);
         recyclerView = findViewById(R.id.recycler_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
-        refreshButton= findViewById(R.id.refreshButton);
+        refreshButton = findViewById(R.id.refreshButton);
 //        Button refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,31 +56,38 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
             }
         });
-        String mood1 = getIntent().getStringExtra("mood1");
+        String mood1 = getIntent().getStringExtra("mood");
+        Log.e("mmod", mood1);
 
+        String input = mood1.substring(1, mood1.length() - 1);
+        String[] parts = input.split("/");
+        String result = parts[parts.length - 2];
+        result.toLowerCase();
+        Log.e("mmod", result);
         loadButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if(mood1.equals("sad")) {
-                    getMusic("http://192.168.0.104:5000/play_sad_radio", "http://192.168.0.104:5000/get_sad_name", "/Emmu/Sad");
+                if (result.equals("Sad")) {
+                    getMusic("http://192.168.0.21:5000/play_sad_radio", "http://192.168.0.21:5000/get_sad_name", "/Emmu/Sad");
                 }
-                if(mood1.equals("happy")) {
-                    getMusic("http://192.168.0.104:5000/play_happy_radio", "http://192.168.0.104:5000/get_happy_name", "/Emmu/Happy");
+                if (result.equals("Happy")) {
+                    getMusic("http://192.168.0.21:5000/play_happy_radio", "http://192.168.0.21:5000/get_happy_name", "/Emmu/Happy");
                 }
-                if(mood1.equals("angry")) {
-                    getMusic("http://192.168.0.104:5000/play_angry_radio", "http://192.168.0.104:5000/get_angry_name", "/Emmu/Angry");
+                if (result.equals("Angry")) {
+                    getMusic("http://192.168.0.21:5000/play_angry_radio", "http://192.168.0.21:5000/get_angry_name", "/Emmu/Angry");
                 }
-                if(mood1.equals("disgust")) {
-                    getMusic("http://192.168.0.104:5000/play_disgust_radio", "http://192.168.0.104:5000/get_disgust_name", "/Emmu/Disgust");
+                if (result.equals("Disgust")) {
+                    getMusic("http://192.168.0.21:5000/play_disgust_radio", "http://192.168.0.21:5000/get_disgust_name", "/Emmu/Disgust");
                 }
-                if(mood1.equals("fear")) {
-                    getMusic("http://192.168.0.104:5000/play_fear_radio", "http://192.168.0.104:5000/get_fear_name", "/Emmu/Fear");
+                if (result.equals("Fear")) {
+                    getMusic("http://192.168.0.21:5000/play_fear_radio", "http://192.168.0.21:5000/get_fear_name", "/Emmu/Fear");
                 }
-                if(mood1.equals("neutral")) {
-                    getMusic("http://192.168.0.104:5000/play_neutral_radio", "http://192.168.0.104:5000/get_neutral_name", "/Emmu/Neutral");
+                if (result.equals("Neutral")) {
+                    getMusic("http://192.168.0.21:5000/play_neutral_radio", "http://192.168.0.21:5000/get_neutral_name", "/Emmu/Neutral");
                 }
-                if(mood1.equals("surprised")) {
-                    getMusic("http://192.168.0.104:5000/play_surprise_radio", "http://192.168.0.104:5000/get_surprise_name", "/Emmu/Surprised");
+                if (result.equals("Surprised")) {
+                    getMusic("http://192.168.0.21:5000/play_surprise_radio", "http://192.168.0.21:5000/get_surprise_name", "/Emmu/Surprised");
                 }
             }
         });
@@ -184,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    private void getSadMusic() {
 //        asyncHttpClient = new AsyncHttpClient();
-////        String url = "http://192.168.0.104:5000/play_sad_radio";
+////        String url = "http://192.168.0.21:5000/play_sad_radio";
 //        asyncHttpClient.get("http://192.168.43.69:5000/play_sad_radio", new AsyncHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -211,20 +222,32 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
+    public static void markAsMusicFile(Context context, String filePath) {
+        MediaScannerConnection.scanFile(
+                context,
+                new String[]{filePath},
+                new String[]{"audio/mp3"},
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    @Override
+                    public void onScanCompleted(String path, Uri uri) {
+                        // File scan completed
+                        // You can perform additional actions here if needed
+                    }
+                });
+    }
+
     private void getMusic(String mus, String name, String path) {
         asyncHttpClient1 = new AsyncHttpClient();
         asyncHttpClient = new AsyncHttpClient();
         final String[] fileName = new String[1];
 
-//        String url = "http://192.168.0.104:5000/play_sad_radio";
 
-//        asyncHttpClient.get("http://192.168.0.104:5000/play_sad_radio", new AsyncHttpResponseHandler() {
-// не проверял, возможно не работает
         asyncHttpClient1.get(name, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
-                    fileName[0] = String.valueOf(responseBody);
+                    fileName[0] = (new String(responseBody, StandardCharsets.UTF_8)) + ".mp3";
+                    Log.e("TrackName", new String(responseBody, StandardCharsets.UTF_8));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -232,9 +255,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("MoodActivity", "Failed to download sad music");
+                Log.e("MoodActivity", "Failed to get track name");
             }
         });
+
         asyncHttpClient.get(mus, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -249,6 +273,8 @@ public class MainActivity extends AppCompatActivity {
                     FileOutputStream fos = new FileOutputStream(file);
                     fos.write(responseBody);
                     fos.close();
+                    Context context = getApplicationContext(); // Obtain the Context instance
+                    markAsMusicFile(context, file.getPath());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -260,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override
