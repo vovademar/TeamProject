@@ -69,25 +69,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (result.equals("Sad")) {
-                    getMusic("http://192.168.0.21:5000/play_sad_radio", "http://192.168.0.21:5000/get_sad_name", "/Emmu/Sad");
+                    getMusic("http://192.168.43.69:5000/play_sad_radio", "http://192.168.43.69:5000/get_sad_name", "/Emmu/Sad");
                 }
                 if (result.equals("Happy")) {
-                    getMusic("http://192.168.0.21:5000/play_happy_radio", "http://192.168.0.21:5000/get_happy_name", "/Emmu/Happy");
+                    getMusic("http://192.168.43.69:5000/play_happy_radio", "http://192.168.43.69:5000/get_happy_name", "/Emmu/Happy");
                 }
                 if (result.equals("Angry")) {
-                    getMusic("http://192.168.0.21:5000/play_angry_radio", "http://192.168.0.21:5000/get_angry_name", "/Emmu/Angry");
+                    getMusic("http://192.168.43.69:5000/play_angry_radio", "http://192.168.43.69:5000/get_angry_name", "/Emmu/Angry");
                 }
                 if (result.equals("Disgust")) {
-                    getMusic("http://192.168.0.21:5000/play_disgust_radio", "http://192.168.0.21:5000/get_disgust_name", "/Emmu/Disgust");
+                    getMusic("http://192.168.43.69:5000/play_disgust_radio", "http://192.168.43.69:5000/get_disgust_name", "/Emmu/Disgust");
                 }
                 if (result.equals("Fear")) {
-                    getMusic("http://192.168.0.21:5000/play_fear_radio", "http://192.168.0.21:5000/get_fear_name", "/Emmu/Fear");
+                    getMusic("http://192.168.43.69:5000/play_fear_radio", "http://192.168.43.69:5000/get_fear_name", "/Emmu/Fear");
                 }
                 if (result.equals("Neutral")) {
-                    getMusic("http://192.168.0.21:5000/play_neutral_radio", "http://192.168.0.21:5000/get_neutral_name", "/Emmu/Neutral");
+                    getMusic("http://192.168.43.69:5000/play_neutral_radio", "http://192.168.43.69:5000/get_neutral_name", "/Emmu/Neutral");
                 }
                 if (result.equals("Surprised")) {
-                    getMusic("http://192.168.0.21:5000/play_surprise_radio", "http://192.168.0.21:5000/get_surprise_name", "/Emmu/Surprised");
+                    getMusic("http://192.168.43.69:5000/play_surprise_radio", "http://192.168.43.69:5000/get_surprise_name", "/Emmu/Surprised");
                 }
             }
         });
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    private void getSadMusic() {
 //        asyncHttpClient = new AsyncHttpClient();
-////        String url = "http://192.168.0.21:5000/play_sad_radio";
+////        String url = "http://192.168.43.69:5000/play_sad_radio";
 //        asyncHttpClient.get("http://192.168.43.69:5000/play_sad_radio", new AsyncHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
