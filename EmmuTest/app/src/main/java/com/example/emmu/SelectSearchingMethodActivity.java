@@ -1,5 +1,6 @@
 package com.example.emmu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,8 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
 
     private RelativeLayout findMusicByMoodsButton;
     private RelativeLayout findMusicByPhotoButton;
-    private RelativeLayout enterAccountButton;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,6 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
 
         findMusicByMoodsButton = findViewById(R.id.find_music_by_moods_button);
         findMusicByPhotoButton = findViewById(R.id.find_music_by_photo_button);
-        enterAccountButton = findViewById(R.id.enter_to_account_button);
 
         findMusicByMoodsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +41,6 @@ public class SelectSearchingMethodActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectSearchingMethodActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
-        });
-
-        enterAccountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SelectSearchingMethodActivity.this, AuthorizationActivity.class);
-            startActivity(intent);
         });
     }
 }
