@@ -1,11 +1,9 @@
-import time
-from time import sleep
-
-from backend.app import app
+from deepface import DeepFace
+from flask import request
 from flask import send_file
 from yandex_music import Client
-from flask import request
 
+from backend.app import app
 from music.get_current_track import CurrentTrack
 from music.radio.track_by_mood import TrackByMood
 
@@ -37,14 +35,15 @@ def get_track_id():
 @app.route('/getcover')
 def get_picture():
     CurrentTrack(client).get_pic()
-    return send_file(f'/Users/valdemar/PycharmProjects/TeamProject/backend/{CurrentTrack(client).get_label()}.png')
+    return send_file(f'/Users/valdemar/NSU/my/TeamProject/backend/{CurrentTrack(client).get_label()}.png')
 
 
 @app.route('/sendtoken', methods=['POST'])
 def json_example():
     request_data = request.args.get("token")
+    save_data(request_data)
     pre_download_each()
-    return save_data(request_data)
+    return "saved"
 
 
 def pre_download_each():
@@ -64,6 +63,14 @@ def save_data(text):
     return "token saved"
 
 
+@app.route('/get_sad_name')
+def get_sad_track_name():
+    with open('sad.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
+
+
 @app.route('/play_sad_radio')
 def sad_radio():
     with open('sad.txt', 'r') as file:
@@ -80,7 +87,14 @@ def pre_download_sad():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('sad.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_angry_name')
+def get_angry_track_name():
+    with open('angry.txt', 'r') as file:
+        track_path = file.read().rstrip()
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_angry_radio')
@@ -99,7 +113,15 @@ def pre_download_angry():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('angry.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_disgust_name')
+def get_disgust_track_name():
+    with open('disgust.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_disgust_radio')
@@ -118,7 +140,15 @@ def pre_download_disgust():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('disgust.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_fear_name')
+def get_fear_track_name():
+    with open('fear.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_fear_radio')
@@ -137,7 +167,15 @@ def pre_download_fear():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('fear.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_happy_name')
+def get_happy_track_name():
+    with open('happy.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_happy_radio')
@@ -156,7 +194,15 @@ def pre_download_happy():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('happy.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_neutral_name')
+def get_neutral_track_name():
+    with open('neutral.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_neutral_radio')
@@ -175,7 +221,15 @@ def pre_download_neutral():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('neutral.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route('/get_surprise_name')
+def get_surprise_track_name():
+    with open('surprise.txt', 'r') as file:
+        track_path = file.read().rstrip()
+
+    return track_path[43:len(track_path) - 4]
 
 
 @app.route('/play_surprise_radio')
@@ -194,4 +248,44 @@ def pre_download_surprise():
     filename = f'{artists}-{title}.mp3'
     track.download(filename)
     file_sad = open('surprise.txt', 'w')
-    file_sad.write(f"/Users/valdemar/PycharmProjects/TeamProject/backend/{filename}")
+    file_sad.write(f"/Users/valdemar/NSU/my/TeamProject/backend/{filename}")
+
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    input_args = request.get_json()
+
+    if input_args is None:
+        return {"message": "empty input set passed"}
+
+    img_path = input_args.get("img_path")
+    if img_path is None:
+        return {"message": "you must pass img_path input"}
+
+    detector_backend = input_args.get("detector_backend", "retinaface")
+    enforce_detection = input_args.get("enforce_detection", False)
+    align = input_args.get("align", True)
+    actions = input_args.get("actions", ["emotion"])
+
+    demographies = analyze_image(
+        img_path=img_path,
+        actions=actions,
+        detector_backend=detector_backend,
+        enforce_detection=enforce_detection,
+        align=align,
+    )
+
+    return demographies["results"][0]["dominant_emotion"]
+
+
+def analyze_image(img_path, actions, detector_backend, enforce_detection, align):
+    result = {}
+    demographies = DeepFace.analyze(
+        img_path=img_path,
+        actions=actions,
+        detector_backend=detector_backend,
+        enforce_detection=enforce_detection,
+        align=align,
+    )
+    result["results"] = demographies
+    return result

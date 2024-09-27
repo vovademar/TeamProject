@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Emmu</string>
+    <string name="login_yandex">Login to Yandex</string>
+    <string name="token_not_linked_yandex">Account not linked</string>
+    <string name="token_linked_yandex">Account is linked</string>
 </resources>
